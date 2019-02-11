@@ -3,7 +3,7 @@
   TFile *file_input = TFile::Open("EdMedPhysics.root");
 
   //Reading the data (in TTree format
-  TTree *EdMedPh = (TTree *) file_input->Get("EdMedPh;1");
+  TTree *EdMedPh = (TTree *) file_input->Get("EdMedPh");
 
   //Setting up your variables that you want to read from the data
   double Eabs;
