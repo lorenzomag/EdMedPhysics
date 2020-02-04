@@ -64,7 +64,7 @@ EdMedPhRunAction::EdMedPhRunAction()
   analysisManager->CreateH1("Edep_vs_z","Edep vs z; z(mm)", 500, 0.,50*cm);
   analysisManager->CreateH1("Edep_vs_z_zoom10cm","Edep vs z; z(mm)", 100, 0.,10*cm);
   analysisManager->CreateH1("Edep_vs_z_zoom20cm","Edep vs z; z(mm)", 100, 0.,20*cm);
-  analysisManager->CreateH1("Lenght","trackL in material; z(mm)", 500, 0., 0.5*m);
+  analysisManager->CreateH1("Length","trackL in material; z(mm)", 500, 0., 0.5*m);
 
   // Creating ntuple
   //
