@@ -88,8 +88,6 @@ void EdMedPhcEventAction::PrintEventStatistics(
      << "       total track length: " 
      << std::setw(7) << G4BestUnit(absoTrackLength, "Length")
      << G4endl;
-  gapEdep = gapEdep;
-  gapTrackLength = gapTrackLength;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

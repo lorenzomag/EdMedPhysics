@@ -61,7 +61,8 @@ EdMedPhRunAction::EdMedPhRunAction()
   //
   
   // Creating histograms
-  analysisManager->CreateH1("Edep_vs_z","Edep vs z; z(mm)", 500, 0.,50*cm);
+  //  analysisManager->CreateH1("Edep_vs_z","Edep vs z; z(mm)", 500, 0.,50*cm);
+  analysisManager->CreateH1("Edep_vs_z","Edep vs z;Edep; z(mm)", 500, 0.,50*cm);
   analysisManager->CreateH1("Edep_vs_z_zoom10cm","Edep vs z; z(mm)", 100, 0.,10*cm);
   analysisManager->CreateH1("Edep_vs_z_zoom20cm","Edep vs z; z(mm)", 100, 0.,20*cm);
   analysisManager->CreateH1("Length","trackL in material; z(mm)", 500, 0., 0.5*m);
@@ -69,7 +70,7 @@ EdMedPhRunAction::EdMedPhRunAction()
   // Creating ntuple
   //
   analysisManager->CreateNtuple("EdMedPh", "Edep spacial distribution");
-  analysisManager->CreateNtupleDColumn("Eabs");
+  analysisManager->CreateNtupleDColumn("Edep");
   analysisManager->CreateNtupleDColumn("X");
   analysisManager->CreateNtupleDColumn("Y");
   analysisManager->CreateNtupleDColumn("Z");
@@ -120,7 +121,7 @@ void EdMedPhRunAction::EndOfRunAction(const G4Run* /*run*/)
        << " rms = " 
        << G4BestUnit(analysisManager->GetH1(0)->rms(),  "Length") << G4endl;
     
-    G4cout << " Lenght of radiation interaction : mean = " 
+    G4cout << " Length of radiation interaction : mean = " 
       << G4BestUnit(analysisManager->GetH1(3)->mean(), "Length") 
       << " rms = " 
       << G4BestUnit(analysisManager->GetH1(3)->rms(),  "Length") << G4endl;
