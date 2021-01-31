@@ -1,4 +1,4 @@
-void edit_histos(double x_max = -1.){
+void edit_histo(double x_max = -1.){
   
   // The name of the file to input.
   // Ie the simulation output file name.
@@ -10,8 +10,7 @@ void edit_histos(double x_max = -1.){
 
   // Connect to a histogram in the file.
   // https://root.cern.ch/doc/master/classTH1D-members.html
-  TH1D * Edep_vs_Z_edited = (TH1D*)input_file->Get("Edep_vs_z");
-  
+  TH1D * Edep_vs_Z_edited = (TH1D*)input_file->Get("Edep_vs_z");  
   
   Edep_vs_Z_edited->SetName("Edep_vs_Z_edited");
 
