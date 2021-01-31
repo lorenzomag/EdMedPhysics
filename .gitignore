@@ -1,0 +1,8 @@
+CMakeCache.txt
+CMakeFiles/
+EdMedPhc_executable
+Makefile
+cmake_install.cmake
+*.root
+*.pdf
+*~
