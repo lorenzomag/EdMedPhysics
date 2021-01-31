@@ -6,18 +6,18 @@
   TTree *EdMedPh = (TTree *) file_input->Get("EdMedPh;1");
 
   //Setting up your variables that you want to read from the data
-  double Eabs;
+  double Edep;
   double X;
   double Y;
   double Z;
 
   // Connect these variables to the one in the TTree data 
-  EdMedPh->SetBranchAddress("Eabs",&Eabs);
+  EdMedPh->SetBranchAddress("Edep",&Edep);
   EdMedPh->SetBranchAddress("X",&X); 
   EdMedPh->SetBranchAddress("Y",&Y);
   EdMedPh->SetBranchAddress("Z",&Z); // positions are recorded in mm
 
-  // See how many entries (collections of E_abs,X,Y,Z) are written in the data file (each particle beam throw into the target can deposit energy multiple times at multiple steps inside the target, through the particle itself or with its shower of particles created)  
+  // See how many entries (collections of E_dep,X,Y,Z) are written in the data file (each particle beam throw into the target can deposit energy multiple times at multiple steps inside the target, through the particle itself or with its shower of particles created)  
   int entries = EdMedPh->GetEntries();
 
   //Create your hystogram (100 bins between 0.0cm and 50.0cm)
@@ -30,7 +30,7 @@
   for (int i=0; i< entries; i++) {
     EdMedPh->GetEntry(i); // Read the single entry inside the data file (Now all the variables are linked to the values at this entry
     histo_example_Z->Fill(Z/10); // (Z is in mm!! we want it in cm)each value of Z is put into the histograms: This will give how many times there was an energy deposited in each range defined by this bin in the histogram
-    histo_example->Fill(Z/10,Eabs); // same as before, but now each entry is weighted with the energy deposited at that moment. At the end this  will five the full energy deposited in each bin in Z.
+    histo_example->Fill(Z/10,Edep); // same as before, but now each entry is weighted with the energy deposited at that moment. At the end this  will five the full energy deposited in each bin in Z.
 
     // We can make a cut on the data (NB variables in mm)
     if ( (X*X+Y*Y) < 1 ) {
