@@ -3,8 +3,14 @@
 # Initialize kernel
 /run/initialize
 #
+# Specify the beam particle
 /gun/particle proton
+
+# Set the beam particle energy
 /gun/energy 100 MeV
+
+# Print to screen progress of run every 100 events
 /run/printProgress 100
 
-/run/beamOn 100
+# One thousand protons will be generated
+/run/beamOn 1000
