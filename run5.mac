@@ -1,9 +1,0 @@
-# Macro file for EdMedPhysics
-# 
-# neutral pions
-#
-/gun/particle pi0
-/gun/energy 100 MeV
-/run/printProgress 100
-/run/beamOn 1000
-
