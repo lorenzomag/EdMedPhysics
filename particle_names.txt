@@ -1,0 +1,31 @@
+Some options for /gun/particle
+
+// common particles used in
+// radio- and hadron- therapy
+gamma 
+e-
+proton
+ion			// see ion.mac for how to implement
+
+// alternatives
+alpha
+neutron
+He3
+deuteron
+e+ 
+pi+, pi-, pi0, 
+mu+, mu-
+kaon+, kaon-, kaon0
+
+// anti-particles 
+anti_proton
+anti_alpha
+anti_deuteron
+anti_neutron
+
+// special Geant4 particles
+GenericIon
+geantino
+chargedgeantino
+
+
