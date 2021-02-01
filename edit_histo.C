@@ -7,6 +7,8 @@ void edit_histo(double x_max = -1.){
   // Declare a TFile object to read in data from.
   // Use the filename character array from above.
   TFile * input_file = new TFile(filename,"UPDATE");
+  
+  input_file->cd();
 
   // Connect to a histogram in the file.
   // https://root.cern.ch/doc/master/classTH1D-members.html
