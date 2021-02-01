@@ -1,15 +1,25 @@
-# Macro file for EdMedPhysics
+# Example macro file - very basic  
 # 
-# carbon ions
+# This macro does not specify  
+# particle settings and therefore
+# default values are implemented
+# (see src/EdMedPhPrimaryGeneratorAction.cc)
 #
-#
-/gun/particle ion
-/gun/ion 6 12 
+# Default kinematics are 
+# 50 MeV electrons in direction (0.,0.,1.)
 
-# Ion beams are specified in MeV/u
-# u = 12 for Carbon-12
-# ion therapy beams be as much as 430 MeV/u 
-/gun/energy  4000 MeV
+# Initialize kernel
+/run/initialize
 
+# Print out information about 
+# each step of the particle tracks
+/tracking/verbose 1
+
+# Print to screen progress of run every 100 events
 /run/printProgress 100
-/run/beamOn 50
+
+# Execute the run with 
+# 10 beam particles generated
+# (one per event) 
+
+/run/beamOn 10

@@ -146,12 +146,12 @@ G4bool EdMedPhcCalorimeterSD::ProcessHits(G4Step* step,
 void EdMedPhcCalorimeterSD::EndOfEvent(G4HCofThisEvent*)
 {
   if ( verboseLevel>1 ) { 
-     auto nofHits = fHitsCollection->entries();
-     G4cout
-       << G4endl 
-       << "-------->Hits Collection: in this event they are " << nofHits 
-       << " hits in the tracker chambers: " << G4endl;
-     for ( G4int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
+    long unsigned int nofHits = fHitsCollection->entries();
+    G4cout
+      << G4endl 
+      << "-------->Hits Collection: in this event they are " << nofHits 
+      << " hits in the tracker chambers: " << G4endl;
+    for ( long unsigned int i=0; i<nofHits; i++ ) (*fHitsCollection)[i]->Print();
   }
 }
 

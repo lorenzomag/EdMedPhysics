@@ -1,38 +1,25 @@
-# Example macro file 
+# Example macro file - very basic  
 # 
+# This macro does not specify  
+# particle settings and therefore
+# default values are implemented
+# (see src/EdMedPhPrimaryGeneratorAction.cc)
+#
+# Default kinematics are 
+# 50 MeV electrons in direction (0.,0.,1.)
+
 # Initialize kernel
 /run/initialize
-#
-# Default kinematics: 
-# electron 50 MeV in direction (0.,0.,1.)
-# 1 event with tracking/verbose
-#
+
+# Print out information about 
+# each step of the particle tracks
 /tracking/verbose 1
-/run/beamOn 1
-#
-#
-# muon 300 MeV in direction (0.,0.,1.)
-# 3 events
-#
-/gun/particle mu+
-/gun/energy 3 MeV
-/run/beamOn 3
-#
-# 20 events
-#
-/tracking/verbose 0
-/run/printProgress 5
-/run/beamOn 20
-#
-# Magnetic field
-# 
-/globalField/setValue 0.2 0 0 tesla
-/run/beamOn 3
-#
-# Activate/inactivate physics processes
-#
-/process/list
-/process/inactivate eBrem
-#
-/run/beamOn 20
-#
+
+# Print to screen progress of run every 100 events
+/run/printProgress 100
+
+# Execute the run with 
+# 10 beam particles generated
+# (one per event) 
+
+/run/beamOn 10

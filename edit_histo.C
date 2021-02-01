@@ -67,17 +67,20 @@ void edit_histo(double x_max = -1.){
   // This will only apply to the pdf image
   Edep_vs_Z_edited->Draw("hist");
   
-  // Add the edited histogram to the existing root file.
-  input_file->Write();
-
+  
   // Save the canvas as a pdf
   canvas.SaveAs("my_histogram.pdf");
   // NB Several other file types can be specified
   // including image files (.png,.eps,.jpg); or even a .root or .C file.
   
+  // Add the edited histogram to the existing root file.
+  input_file->Write();
+  
   std::cout << std::endl;
   std::cout << " " << filename << " has been updated" << std::endl;
   std::cout << std::endl;
+
+  input_file->Close();
   
   // quit root and return to the terminal command prompt
   gApplication->Terminate();

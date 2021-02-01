@@ -10,14 +10,16 @@
 
 # Initialize kernel
 /run/initialize
-#
 
-# Set to print out information about 
+# Print out information about 
 # each step of the particle tracks
 /tracking/verbose 1
 
+# Print to screen progress of run every 100 events
+/run/printProgress 100
+
 # Execute the run with 
-# 5 beam particles generated
+# 10 beam particles generated
 # (one per event) 
 
 /run/beamOn 10
