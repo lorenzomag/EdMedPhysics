@@ -1,3 +1,38 @@
+/* A function to read from a root file
+   and save an edited version of one of 
+   the histograms 
+
+   gary.smith@ed.ac.uk
+   01 Feb 2021
+   
+   This program was written for the EdMedPhysics 
+   projects in 2021 to assist with data analysis.
+   
+   Input:
+   A root file which is the output from
+   the Geant4 simulation.
+   
+   Output: 
+   1) a pdf file of a histogram with edited axis labels
+   and a user-defined x-axis maximum; 
+   2) a root file containing the same
+   
+   
+   How to run:
+   
+   From terminal command line
+   $ root edit_histo.C
+   
+   From the root prompt
+   $ root
+   [0] .x edit_histo.C
+   Or, setting x_max = 10 upon execution
+   [0] .L edit_histo.C
+   [1] edit_histo(10) 
+   
+*/
+
+// Function declaration with optional argument
 void edit_histo(double x_max = -1.){
   
   // The name of the file to input.
@@ -6,16 +41,16 @@ void edit_histo(double x_max = -1.){
 
   // Declare a TFile object to read in data from.
   // Use the filename character array from above.
-  TFile * input_file = new TFile(filename,"append");
+  TFile * input_file = new TFile(filename,"");
 
   // Connect to a histogram in the file.
   // https://root.cern.ch/doc/master/classTH1D-members.html
-  TH1D * Edep_vs_Z_edited = (TH1D*)input_file->Get("Edep_vs_z");  
+  TH1D * Edep_vs_Z = (TH1D*)input_file->Get("Edep_vs_z");  
   
-  Edep_vs_Z_edited->SetName("Edep_vs_Z_edited");
+  Edep_vs_Z->SetName("Edep_vs_Z");
 
   // Fix the histogram axis labels.
-  Edep_vs_Z_edited->SetTitle("Edep_vs_Z;Z in phantom (mm);Accumulated energy deposited (MeV)");
+  Edep_vs_Z->SetTitle("Edep_vs_Z;Z in phantom (mm);Accumulated energy deposited (MeV)");
   
   // Fix the x-axis range.
   // Stay in the while loop until a valid answer is given.
@@ -29,7 +64,7 @@ void edit_histo(double x_max = -1.){
     std::cout << " Enter a value between 0 and 50, e.g. for 12 cm enter 12." << std::endl;
     std::cout << " \t";
     
-    // Read the users answer in.
+    // Read the user's answer in.
     std::cin >> x_max;
     
     // Scale from cm to mm.
@@ -38,7 +73,7 @@ void edit_histo(double x_max = -1.){
   std::cout << std::endl;
   
   // Set the x-axis range to the value specified above.
-  Edep_vs_Z_edited->GetXaxis()->SetRangeUser(-5,x_max);
+  Edep_vs_Z->GetXaxis()->SetRangeUser(-5,x_max);
 
   // The stats box can be modified.
   // (https://root.cern.ch/doc/master/classTPaveStats.html)
@@ -63,21 +98,17 @@ void edit_histo(double x_max = -1.){
   // Draw histogram as a simple histogram 
   // with no error bars.
   // This will only apply to the pdf image
-  Edep_vs_Z_edited->Draw("hist");
-  
+  Edep_vs_Z->Draw("hist");
   
   // Save the canvas as a pdf
-  canvas.SaveAs("my_histogram.pdf");
-  // NB Several other file types can be specified
-  // including image files (.png,.eps,.jpg); or even a .root or .C file.
-  
-  // Add the edited histogram to the existing root file.
-  input_file->Write();
-  
-   std::cout << std::endl;
-   std::cout << " " << filename << " has been updated" << std::endl;
-   std::cout << std::endl;
+  canvas.SaveAs("my_edited_histo.pdf");
 
+  // And also as a root file
+  canvas.SaveAs("my_edited_histo.root");
+  
+  // NB Several other file types can be specified
+  // including image files (.png,.eps,.jpg); or even a .C macro.
+  
   input_file->Close();
   
   // quit root and return to the terminal command prompt

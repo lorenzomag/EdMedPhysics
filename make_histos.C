@@ -1,4 +1,31 @@
-void make_histograms(){
+/* A function to read from a root file
+   and create plots to visualise the data
+
+   gary.smith@ed.ac.uk
+   01 Feb 2021
+   
+   This program was written for the EdMedPhysics 
+   projects in 2021 to assist with data analysis.
+   
+   Input:
+   A root file which is the output from
+   the Geant4 simulation.
+   
+   Output: 
+   1) an output root file containing new histograms
+   2) pdfs of the histograms
+   
+   How to run:
+   
+   From terminal command line
+   $ root make_histos.C
+
+   From the root prompt
+   $ root
+   [0] .x make_histos.C
+   
+*/
+void make_histos(){
   
   // The name of the file to input, 
   // ie the simulation output file.
@@ -54,27 +81,29 @@ void make_histograms(){
     
   }
   
-  
-  
+ 
   // Create a canvas to draw on
-  // and later to save as a pdf
+  // and later for saving as a pdfs
   TCanvas * canvas = new TCanvas();
   
-  // Dont show show the stats box 
+  // Dont show the stats box 
   gStyle->SetOptStat(0);
 
+  // Draw as heat map ie with
+  // counts in colors
   hXY->Draw("colz");
   canvas->SaveAs("hXY.pdf");
 
   hZR->Draw("colz");
   canvas->SaveAs("hZR.pdf");
-  
-  TFile * output_file = new TFile("my_analysis.root","RECREATE");
+
+  // Create a new file to save the histograms in.
+  TFile * output_file = new TFile("my_new_histos.root","RECREATE");
   output_file->cd();
   hXY->Write();
   hZR->Write();
   output_file->Close();
-  
+
   input_file->Close();
  
   // quit root and return to the terminal command prompt
