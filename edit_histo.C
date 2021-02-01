@@ -6,9 +6,7 @@ void edit_histo(double x_max = -1.){
 
   // Declare a TFile object to read in data from.
   // Use the filename character array from above.
-  TFile * input_file = new TFile(filename,"UPDATE");
-  
-  input_file->cd();
+  TFile * input_file = new TFile(filename,"append");
 
   // Connect to a histogram in the file.
   // https://root.cern.ch/doc/master/classTH1D-members.html
@@ -76,9 +74,9 @@ void edit_histo(double x_max = -1.){
   // Add the edited histogram to the existing root file.
   input_file->Write();
   
-  std::cout << std::endl;
-  std::cout << " " << filename << " has been updated" << std::endl;
-  std::cout << std::endl;
+   std::cout << std::endl;
+   std::cout << " " << filename << " has been updated" << std::endl;
+   std::cout << std::endl;
 
   input_file->Close();
   
