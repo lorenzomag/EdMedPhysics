@@ -77,9 +77,7 @@ EdMedPhcEventAction::GetHitsCollection(G4int hcID,
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EdMedPhcEventAction::PrintEventStatistics(
-                              G4double absoEdep, G4double absoTrackLength,
-                              G4double gapEdep, G4double gapTrackLength) const
+void EdMedPhcEventAction::PrintEventStatistics(G4double absoEdep, G4double absoTrackLength) const
 {
   // print event statistics
   G4cout
@@ -109,11 +107,11 @@ void EdMedPhcEventAction::EndOfEventAction(const G4Event* event)
 
   // Get hits collections
   auto absoHC = GetHitsCollection(fAbsHCID, event);
-  auto gapHC = GetHitsCollection(fGapHCID, event);
+  //  auto gapHC = GetHitsCollection(fGapHCID, event);
 
   // Get hit with total values
   auto absoHit = (*absoHC)[absoHC->entries()-1];
-  auto gapHit = (*gapHC)[gapHC->entries()-1];
+  //  auto gapHit = (*gapHC)[gapHC->entries()-1];
  
   // Print per event (modulo n)
   //
@@ -123,8 +121,7 @@ void EdMedPhcEventAction::EndOfEventAction(const G4Event* event)
     G4cout << "---> End of event: " << eventID << G4endl;     
 
     PrintEventStatistics(
-      absoHit->GetEdep(), absoHit->GetTrackLength(),
-      gapHit->GetEdep(), gapHit->GetTrackLength());
+      absoHit->GetEdep(), absoHit->GetTrackLength());
   }  
   
   // Fill histograms, ntuple
