@@ -59,7 +59,7 @@ void edit_histo(double x_max = -1.){
 
   // Create a canvas to draw on
   // and later to save as a pdf
-  TCanvas c1;
+  TCanvas canvas;
   // Draw histogram as a simple histogram 
   // with no error bars.
   // This will only apply to the pdf image
@@ -69,7 +69,7 @@ void edit_histo(double x_max = -1.){
   input_file->Write();
 
   // Save the canvas as a pdf
-  c1.SaveAs("my_histogram.pdf");
+  canvas.SaveAs("my_histogram.pdf");
   // NB Several other file types can be specified
   // including image files (.png,.eps,.jpg); or even a .root or .C file.
   
