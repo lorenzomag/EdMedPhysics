@@ -10,7 +10,6 @@ void make_histograms(){
   
   // A TTree is an ntuple with variables 
   // stored with different values per event.
-  //TTree * tree = (TTree *) input_file->Get("EdMedPh;1");
   TTree * tree = (TTree *) input_file->Get("EdMedPh");
 
   // Declare variables to read from the tree.
