@@ -10,7 +10,8 @@ void make_histograms(){
   
   // A TTree is an ntuple with variables 
   // stored with different values per event.
-  TTree * tree = (TTree *) input_file->Get("EdMedPh;1");
+  //TTree * tree = (TTree *) input_file->Get("EdMedPh;1");
+  TTree * tree = (TTree *) input_file->Get("EdMedPh");
 
   // Declare variables to read from the tree.
   // The same variable names are used here as in the
@@ -53,7 +54,9 @@ void make_histograms(){
     hZR->Fill(Z/10,sqrt(X*X+Y*Y)/10,Edep);
     
   }
-
+  
+  
+  
   // Create a canvas to draw on
   // and later to save as a pdf
   TCanvas * canvas = new TCanvas();
@@ -68,10 +71,13 @@ void make_histograms(){
   canvas->SaveAs("hZR.pdf");
   
   TFile * output_file = new TFile("my_analysis.root","RECREATE");
-  
+  output_file->cd();
   hXY->Write();
   hZR->Write();
+  output_file->Close();
   
+  input_file->Close();
+ 
   // quit root and return to the terminal command prompt
   gApplication->Terminate();
 
