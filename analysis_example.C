@@ -16,7 +16,7 @@
   EdMedPh->SetBranchAddress("X",&X); 
   EdMedPh->SetBranchAddress("Y",&Y);
   EdMedPh->SetBranchAddress("Z",&Z); // positions are recorded in mm
-
+  
   // See how many entries (collections of E_dep,X,Y,Z) are written in the data file (each particle beam throw into the target can deposit energy multiple times at multiple steps inside the target, through the particle itself or with its shower of particles created)  
   int entries = EdMedPh->GetEntries();
 
