@@ -68,6 +68,12 @@ void make_histos(){
   TH2F *hZR =  new TH2F("hZR","; Z (cm) ; R (cm)",
 			100,0.0,15.0, 100,0.0,5.0);
   
+  
+  // Declare a 3D histogram
+  TH3F *hZXY =  new TH3F("hZXY","; Z (cm) ; X (cm); Y (cm)",
+			 100,0.,20.,100,-15.0,15.0, 100,-15.0,15.0);
+  
+
   for (int i = 0; i < entries; i++) {
     
     // Get data for next energy deposit
@@ -79,15 +85,21 @@ void make_histos(){
     
     hZR->Fill(Z/10,sqrt(X*X+Y*Y)/10,Edep);
     
+    // Apply a cut on the Z position
+    if( (Z/10) < 15. )
+      hZXY->Fill(Z/10.,X/10.,Y/10.,Edep);
   }
   
  
   // Create a canvas to draw on
-  // and later for saving as a pdfs
+  // and later for saving a pdfs
   TCanvas * canvas = new TCanvas();
   
   // Dont show the stats box 
   gStyle->SetOptStat(0);
+
+  // For Draw Options see 5.8.2 at the link below 
+  //https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html#drawing-histograms
 
   // Draw as heat map ie with
   // counts in colors
@@ -97,11 +109,18 @@ void make_histos(){
   hZR->Draw("colz");
   canvas->SaveAs("hZR.pdf");
 
+  hZXY->Draw("BOX");
+  //hZXY->Draw("ISO");
+  canvas->SaveAs("hZXY.pdf");
+  
   // Create a new file to save the histograms in.
   TFile * output_file = new TFile("my_new_histos.root","RECREATE");
   output_file->cd();
+  
   hXY->Write();
   hZR->Write();
+  hZXY->Write();
+  
   output_file->Close();
 
   input_file->Close();

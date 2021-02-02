@@ -15,8 +15,7 @@
    Output: 
    1) a pdf file of a histogram with edited axis labels
    and a user-defined x-axis maximum; 
-   2) a root file containing the same
-   
+   2) a root file containing the same   
    
    How to run:
    
@@ -34,7 +33,7 @@
 
 // Function declaration with optional argument
 void edit_histo(double x_max = -1.){
-  
+
   // The name of the file to input.
   // Ie the simulation output file name.
   char filename[128] = "EdMedPhysics.root";
@@ -42,14 +41,16 @@ void edit_histo(double x_max = -1.){
   // Declare a TFile object to read in data from.
   // Use the filename character array from above.
   TFile * input_file = new TFile(filename,"");
-
+  
   // Connect to a histogram in the file.
   // https://root.cern.ch/doc/master/classTH1D-members.html
-  TH1D * Edep_vs_Z = (TH1D*)input_file->Get("Edep_vs_z");  
+  TH1D * Edep_vs_Z = (TH1D*)input_file->Get("Edep_vs_z"); 
   
+  // Re-set the histogram object name.
+  // This is not a title.
   Edep_vs_Z->SetName("Edep_vs_Z");
 
-  // Fix the histogram axis labels.
+  // Fix the histogram title and axis labels.
   Edep_vs_Z->SetTitle("Edep_vs_Z;Z in phantom (mm);Accumulated energy deposited (MeV)");
   
   // Fix the x-axis range.
@@ -73,6 +74,8 @@ void edit_histo(double x_max = -1.){
   std::cout << std::endl;
   
   // Set the x-axis range to the value specified above.
+  // NB this applies to the pdf, the root file version
+  // retains all of the data
   Edep_vs_Z->GetXaxis()->SetRangeUser(-5,x_max);
 
   // The stats box can be modified.
@@ -91,29 +94,32 @@ void edit_histo(double x_max = -1.){
   // To include the title, 
   // comment in the line below by putting // at the start of the line.
   gStyle->SetOptTitle(0);
-
+  
+  // Set no. of digits at which axis numbers 
+  // are displayed as exponentials 
+  TGaxis::SetMaxDigits(2);
+  
   // Create a canvas to draw on
   // and later to save as a pdf
   TCanvas canvas;
+  
   // Draw histogram as a simple histogram 
   // with no error bars.
-  // This will only apply to the pdf image
+  // This will only apply to the pdf image.
   Edep_vs_Z->Draw("hist");
 
-  Edep_vs_Z->Print("my_edited_histo.root");
-  
-  // Save the canvas as a pdf
+  // Save the canvas as a pdf...
   canvas.SaveAs("my_edited_histo.pdf");
 
-  // And also as a root file
-  //canvas.SaveAs("my_edited_histo.root");
-  
+  // ... and also as a root file.
+  Edep_vs_Z->SaveAs("my_edited_histo.root");
+   
   // NB Several other file types can be specified
   // including image files (.png,.eps,.jpg); or even a .C macro.
   
   input_file->Close();
-  
-  // quit root and return to the terminal command prompt
+
+  // Quit root and return to the terminal command prompt.
   gApplication->Terminate();
   
   // "Wouldn't you like to be a pepper too?"
