@@ -99,12 +99,14 @@ void edit_histo(double x_max = -1.){
   // with no error bars.
   // This will only apply to the pdf image
   Edep_vs_Z->Draw("hist");
+
+  Edep_vs_Z->Print("my_edited_histo.root");
   
   // Save the canvas as a pdf
   canvas.SaveAs("my_edited_histo.pdf");
 
   // And also as a root file
-  canvas.SaveAs("my_edited_histo.root");
+  //canvas.SaveAs("my_edited_histo.root");
   
   // NB Several other file types can be specified
   // including image files (.png,.eps,.jpg); or even a .C macro.
