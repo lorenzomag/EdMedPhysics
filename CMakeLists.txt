@@ -55,7 +55,15 @@ set(EXAMPLEEdMedPhC_SCRIPTS
   run5.mac
   run6.mac
   vis.mac
-  analysis_example.C
+  basic.mac
+  protons.mac
+  ions.mac
+  gammas.mac
+  B_field.mac
+  vis_electrons.mac
+  vis_protons.mac
+  edit_histo.C
+  make_histos.C
   )
 
 foreach(_script ${EXAMPLEEdMedPhC_SCRIPTS})
