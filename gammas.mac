@@ -7,7 +7,7 @@
 /gun/particle gamma
 
 # Set the beam particle energy
-/gun/energy 100 MeV
+/gun/energy 5 MeV
 
 # Print to screen progress of run every 100 events
 /run/printProgress 100
