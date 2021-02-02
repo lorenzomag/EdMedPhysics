@@ -1,4 +1,31 @@
-void make_histograms(){
+/* A function to read from a root file
+   and create plots to visualise the data
+
+   gary.smith@ed.ac.uk
+   01 Feb 2021
+   
+   This program was written for the EdMedPhysics 
+   projects in 2021 to assist with data analysis.
+   
+   Input:
+   A root file which is the output from
+   the Geant4 simulation.
+   
+   Output: 
+   1) an output root file containing new histograms
+   2) pdfs of the histograms
+   
+   How to run:
+   
+   From terminal command line
+   $ root make_histos.C
+
+   From the root prompt
+   $ root
+   [0] .x make_histos.C
+   
+*/
+void make_histos(){
   
   // The name of the file to input, 
   // ie the simulation output file.
@@ -41,6 +68,12 @@ void make_histograms(){
   TH2F *hZR =  new TH2F("hZR","; Z (cm) ; R (cm)",
 			100,0.0,15.0, 100,0.0,5.0);
   
+  
+  // Declare a 3D histogram
+  TH3F *hZXY =  new TH3F("hZXY","; Z (cm) ; X (cm); Y (cm)",
+			 100,0.,20.,100,-15.0,15.0, 100,-15.0,15.0);
+  
+
   for (int i = 0; i < entries; i++) {
     
     // Get data for next energy deposit
@@ -52,29 +85,44 @@ void make_histograms(){
     
     hZR->Fill(Z/10,sqrt(X*X+Y*Y)/10,Edep);
     
+    // Apply a cut on the Z position
+    if( (Z/10) < 15. )
+      hZXY->Fill(Z/10.,X/10.,Y/10.,Edep);
   }
   
-  
-  
+ 
   // Create a canvas to draw on
-  // and later to save as a pdf
+  // and later for saving a pdfs
   TCanvas * canvas = new TCanvas();
   
-  // Dont show show the stats box 
+  // Dont show the stats box 
   gStyle->SetOptStat(0);
 
+  // For Draw Options see 5.8.2 at the link below 
+  //https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html#drawing-histograms
+
+  // Draw as heat map ie with
+  // counts in colors
   hXY->Draw("colz");
   canvas->SaveAs("hXY.pdf");
 
   hZR->Draw("colz");
   canvas->SaveAs("hZR.pdf");
+
+  hZXY->Draw("BOX");
+  //hZXY->Draw("ISO");
+  canvas->SaveAs("hZXY.pdf");
   
-  TFile * output_file = new TFile("my_analysis.root","RECREATE");
+  // Create a new file to save the histograms in.
+  TFile * output_file = new TFile("my_new_histos.root","RECREATE");
   output_file->cd();
+  
   hXY->Write();
   hZR->Write();
-  output_file->Close();
+  hZXY->Write();
   
+  output_file->Close();
+
   input_file->Close();
  
   // quit root and return to the terminal command prompt
