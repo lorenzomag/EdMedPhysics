@@ -51,7 +51,7 @@ void edit_histo(double x_max = -1.){
   Edep_vs_Z->SetName("Edep_vs_Z");
 
   // Fix the histogram title and axis labels.
-  Edep_vs_Z->SetTitle("Edep_vs_Z;Z in phantom (mm);Accumulated energy deposited (MeV)");
+  Edep_vs_Z->SetTitle(";Z in phantom (mm);Accumulated energy deposited (MeV)");
   
   // Fix the x-axis range.
   // Stay in the while loop until a valid answer is given.
@@ -95,9 +95,10 @@ void edit_histo(double x_max = -1.){
   // comment in the line below by putting // at the start of the line.
   gStyle->SetOptTitle(0);
   
-  // Set no. of digits at which axis numbers 
-  // are displayed as exponentials 
-  TGaxis::SetMaxDigits(2);
+  // Set max no. of digits on axes.
+  // Display large numbers as exponentials 
+  // Comment in the line below to implement by removing the //
+  //TGaxis::SetMaxDigits(2);
   
   // Create a canvas to draw on
   // and later to save as a pdf

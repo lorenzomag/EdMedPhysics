@@ -95,6 +95,8 @@ void make_histos(){
   // and later for saving a pdfs
   TCanvas * canvas = new TCanvas();
   
+  canvas->SetLogz();
+
   // Dont show the stats box 
   gStyle->SetOptStat(0);
 
@@ -109,8 +111,10 @@ void make_histos(){
   hZR->Draw("colz");
   canvas->SaveAs("hZR.pdf");
 
-  hZXY->Draw("BOX");
-  //hZXY->Draw("ISO");
+  canvas->SetLogz(0);
+
+  //hZXY->Draw("BOX");
+  hZXY->Draw("ISO");
   canvas->SaveAs("hZXY.pdf");
   
   // Create a new file to save the histograms in.
