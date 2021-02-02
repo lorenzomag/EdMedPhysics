@@ -128,12 +128,12 @@ void EdMedPhcEventAction::EndOfEventAction(const G4Event* event)
   //
 
   // get analysis manager
-  auto analysisManager = G4AnalysisManager::Instance();
+  // auto analysisManager = G4AnalysisManager::Instance();
  
   // fill histograms
   // analysisManager->FillH1(0, absoHit->GetEdep());
   // analysisManager->FillH1(1, gapHit->GetEdep());
-  analysisManager->FillH1(3, absoHit->GetTrackLength());
+  // analysisManager->FillH1(3, absoHit->GetTrackLength());
   // analysisManager->FillH1(3, gapHit->GetTrackLength());
   
   // // fill ntuple

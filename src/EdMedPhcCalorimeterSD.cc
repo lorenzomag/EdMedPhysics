@@ -100,8 +100,9 @@ G4bool EdMedPhcCalorimeterSD::ProcessHits(G4Step* step,
     G4double z0 = 0.5*(z1 + z2);
     //    G4double r0 = std::sqrt(x0*x0 + y0*y0);
     analysisManager->FillH1(0,z0+25.*cm,edep);
-    analysisManager->FillH1(1,z0+25.*cm,edep);
-    analysisManager->FillH1(2,z0+25.*cm,edep);
+    
+    //analysisManager->FillH1(1,z0+25.*cm,edep);
+    //analysisManager->FillH1(2,z0+25.*cm,edep);
     analysisManager->FillNtupleDColumn(0, edep);
     analysisManager->FillNtupleDColumn(1, x0);
     analysisManager->FillNtupleDColumn(2, y0);
@@ -111,9 +112,9 @@ G4bool EdMedPhcCalorimeterSD::ProcessHits(G4Step* step,
   // step length
   G4double stepLength = 0.;
   // commenting out so that track length also applies to neutrals
-  //if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
-  stepLength = step->GetStepLength();
-  //}
+  if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
+    stepLength = step->GetStepLength();
+  }
 
   if ( edep==0. && stepLength == 0. ) return false;      
 

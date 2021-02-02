@@ -62,10 +62,10 @@ EdMedPhRunAction::EdMedPhRunAction()
   
   // Creating histograms
   //  analysisManager->CreateH1("Edep_vs_z","Edep vs z; z(mm)", 500, 0.,50*cm);
-  analysisManager->CreateH1("Edep_vs_z","Edep vs z;Edep; z(mm)", 500, 0.,50*cm);
-  analysisManager->CreateH1("Edep_vs_z_zoom10cm","Edep vs z; z(mm)", 100, 0.,10*cm);
-  analysisManager->CreateH1("Edep_vs_z_zoom20cm","Edep vs z; z(mm)", 100, 0.,20*cm);
-  analysisManager->CreateH1("Length","trackL in material; z(mm)", 500, 0., 0.5*m);
+  analysisManager->CreateH1("Edep_vs_z","Edep vs z;Edep (MeV); z(mm)", 500, 0.,50*cm);
+  // analysisManager->CreateH1("Edep_vs_z_10cm","Edep vs z;Edep (MeV); z(mm)", 100, 0.,10*cm);
+  // analysisManager->CreateH1("Edep_vs_z_20cm","Edep vs z;Edep (MeV); z(mm)", 100, 0.,20*cm);
+  //  analysisManager->CreateH1("Length","trackL in material; z(mm)", 500, 0., 0.5*m);
 
   // Creating ntuple
   //
@@ -107,7 +107,8 @@ void EdMedPhRunAction::EndOfRunAction(const G4Run* /*run*/)
   // print histogram statistics
   //
   auto analysisManager = G4AnalysisManager::Instance();
-  if ( analysisManager->GetH1(1) ) {
+  //if ( analysisManager->GetH1(1) ) {
+  if ( analysisManager->GetH1(0) ) {
     G4cout << G4endl << " ----> print histograms statistic ";
     if(isMaster) {
       G4cout << "for the entire run " << G4endl << G4endl; 
@@ -121,10 +122,10 @@ void EdMedPhRunAction::EndOfRunAction(const G4Run* /*run*/)
        << " rms = " 
        << G4BestUnit(analysisManager->GetH1(0)->rms(),  "Length") << G4endl;
     
-    G4cout << " Length of radiation interaction : mean = " 
-      << G4BestUnit(analysisManager->GetH1(3)->mean(), "Length") 
-      << " rms = " 
-      << G4BestUnit(analysisManager->GetH1(3)->rms(),  "Length") << G4endl;
+    //     G4cout << " Length of radiation interaction : mean = " 
+    //       << G4BestUnit(analysisManager->GetH1(3)->mean(), "Length") 
+    //       << " rms = " 
+    //       << G4BestUnit(analysisManager->GetH1(3)->rms(),  "Length") << G4endl;
 
   }
 
