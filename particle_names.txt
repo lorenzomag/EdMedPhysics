@@ -5,7 +5,7 @@ Some options for /gun/particle
 gamma 
 e-
 proton
-ion			// see ion.mac for how to implement
+ion			// see ions.mac for how to implement
 
 // alternatives
 alpha
@@ -24,7 +24,6 @@ anti_deuteron
 anti_neutron
 
 // special Geant4 particles
-GenericIon
 geantino
 chargedgeantino
 
