@@ -110,9 +110,10 @@ G4bool EdMedPhcCalorimeterSD::ProcessHits(G4Step* step,
   }
   // step length
   G4double stepLength = 0.;
-  if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
-    stepLength = step->GetStepLength();
-  }
+  // commenting out so that track length also applies to neutrals
+  //if ( step->GetTrack()->GetDefinition()->GetPDGCharge() != 0. ) {
+  stepLength = step->GetStepLength();
+  //}
 
   if ( edep==0. && stepLength == 0. ) return false;      
 
