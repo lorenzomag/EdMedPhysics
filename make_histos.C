@@ -36,7 +36,7 @@ void make_histos(){
   TFile * input_file = TFile::Open(filename);
   
   // A TTree is an ntuple with variables 
-  // stored with different values per event.
+  // stored with different values per entry.
   TTree * tree = (TTree *) input_file->Get("EdMedPh");
 
   // Declare variables to read from the tree.
