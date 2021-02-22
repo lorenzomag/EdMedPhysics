@@ -43,7 +43,7 @@ void make_histos(){
   // The same variable names are used here as in the
   // input file but they could be anything.
   double Edep; // energy deposited during the hit
-  double X, Y, Z; // positions of the hit
+  double X, Y, Z; // coordinates of the hit
   
   // Connect these variables to the ones in the TTree:
   // &Edep e.g assigns the address of the variable above 
@@ -68,12 +68,15 @@ void make_histos(){
   TH2F *hZR =  new TH2F("hZR","; Z (cm) ; R (cm)",
 			100,0.0,15.0, 100,0.0,5.0);
   
-  
   // Declare a 3D histogram
+  // Given this is a 3D histogram the number of bins 
+  // per axis has been reduced 
   TH3F *hZXY =  new TH3F("hZXY","; Z (cm) ; X (cm); Y (cm)",
-			 100,0.,20.,100,-15.0,15.0, 100,-15.0,15.0);
-  
+			 32,0.,20.,32,-15.0,15.0, 32,-15.0,15.0);  
 
+  // The following for loop is used to iterate though the hits.
+  // This is where the histograms are filled and data
+  // cuts can be applied. 
   for (int i = 0; i < entries; i++) {
     
     // Get data for next energy deposit
@@ -89,10 +92,9 @@ void make_histos(){
     if( (Z/10) < 15. )
       hZXY->Fill(Z/10.,X/10.,Y/10.,Edep);
   }
-  
  
   // Create a canvas to draw on
-  // and later for saving a pdfs
+  // and for saving pdfs
   TCanvas * canvas = new TCanvas();
   
   canvas->SetLogz();
@@ -113,8 +115,13 @@ void make_histos(){
 
   canvas->SetLogz(0);
 
-  //hZXY->Draw("BOX");
+  // NB The following option may take some time to draw 
+  // and/or open as an image 
   hZXY->Draw("ISO");
+
+  // alternative draw option - comment in if desired
+  //hZXY->Draw("BOX");
+
   canvas->SaveAs("hZXY.pdf");
   
   // Create a new file to save the histograms in.
