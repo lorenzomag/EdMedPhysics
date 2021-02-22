@@ -128,6 +128,11 @@ void analyse_dose(){
   // For Draw Options see 5.8.2 at the link below 
   //https://root.cern.ch/root/htmldoc/guides/users-guide/Histograms.html#drawing-histograms
 
+  // Use scientific units on axis if
+  // more than 2 digits.
+  // Comment in out or modify as needed.
+  TGaxis::SetMaxDigits(2);
+  
   hZ->Draw("hist");
   canvas->SaveAs("hZ.pdf");
 
