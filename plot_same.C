@@ -40,10 +40,6 @@ void plot_same(){
   
   char filename_1[128] = "Protons.root";
   char filename_2[128] = "Gammas.root";
-
-  // Note that you may have to scale the number 
-  // beam particle to see plots from different
-  // beam settings on the same scales.
   
   // Use the filename character arrays from above.
   TFile * input_file_1 = new TFile(filename_1,"");
@@ -55,9 +51,13 @@ void plot_same(){
   TH1D * Edep_vs_Z_2 = (TH1D*)input_file_2->Get("Edep_vs_z"); 
   
   // Fix the histogram title and axis labels.
-  Edep_vs_Z_1->SetTitle(";Z in phantom (mm);Accumulated energy deposited (MeV)");
-  Edep_vs_Z_2->SetTitle(";Z in phantom (mm);Accumulated energy deposited (MeV)");
-  
+  Edep_vs_Z_1->SetTitle(";Z in phantom (mm);Relative energy deposited (arbitrary units)");
+  Edep_vs_Z_2->SetTitle(";Z in phantom (mm);Relative energy deposited (arbitrary units)");
+
+  // normalise to integral of energy
+  Edep_vs_Z_1->Scale( 1./Edep_vs_Z_1->Integral());
+  Edep_vs_Z_2->Scale( 1./Edep_vs_Z_2->Integral());
+
   // Dont draw stats box
   gStyle->SetOptStat(0);
   
@@ -66,14 +66,10 @@ void plot_same(){
   // comment in the line below by putting // at the start of the line.
   gStyle->SetOptTitle(0);
   
-  // Set max no. of digits on axes.
-  // Display large numbers as exponentials 
-  // Comment in the line below to implement by removing the //
-  //TGaxis::SetMaxDigits(2);
-  
   // Create a canvas to draw on
   // and later to save as a pdf
-  TCanvas canvas;
+  // This one will be quite long and thin.
+  TCanvas canvas("canvas","canvas",800,400);
   
   // Draw histogram as a simple histogram 
   // This will only apply to the pdf image.
@@ -83,16 +79,14 @@ void plot_same(){
 
   Edep_vs_Z_1->Draw("hist");  
   Edep_vs_Z_2->Draw("hist same");
-  //Edep_vs_Z_2->Draw("hist");
-
+  
   // Save the canvas as a pdf...
   canvas.SaveAs("my_overplotted_histos.pdf");
 
-  //  input_file_1->Close();
+  input_file_1->Close();
   input_file_2->Close();
-
+  
   // Quit root and return to the terminal command prompt.
   gApplication->Terminate();
-  
-  // "Wouldn't you like to be a pepper too?"
+
 }
