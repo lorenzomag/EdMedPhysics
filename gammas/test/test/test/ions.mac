@@ -1,0 +1,19 @@
+# Macro file for EdMedPhysics
+# 
+# carbon ions
+#
+# Initialize kernel
+/run/initialize
+#
+/gun/particle ion
+# fully ionised by default (ie +6 charge)
+/gun/ion 6 12 
+
+# Ion beams are specified in MeV/u
+# u = 12 for Carbon-12
+# ion therapy beams be as energetic as 430 MeV/u 
+/gun/energy  4000 MeV
+
+/run/printProgress 100
+/run/beamOn 50
+

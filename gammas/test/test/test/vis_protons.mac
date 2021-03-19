@@ -1,0 +1,26 @@
+# Switches off all trajectories apart from electons
+
+
+# To draw only electrons:
+/vis/filtering/trajectories/create/particleFilter
+/vis/filtering/trajectories/particleFilter-0/add proton
+
+# To invert the above, drawing all particles except e-
+# keep the above two lines but also add:
+#/vis/filtering/trajectories/particleFilter-0/invert true
+
+/vis/modeling/trajectories/create/drawByParticleID
+
+# Print the trajectory settings
+#/vis/modeling/trajectories/list
+
+# change the color of particle trajectories
+#/vis/modeling/trajectories/drawByParticleID-0/set e+ yellow
+
+# To superimpose all of the events from a given run:
+/vis/scene/endOfEventAction accumulate
+
+# Re-establish auto refreshing and verbosity:
+/vis/viewer/set/autoRefresh true
+/vis/verbose warnings
+
