@@ -71,7 +71,6 @@ int main(int argc,char** argv)
   
   G4String macro;
   G4String session;
-  G4String outputFileName;
 #ifdef G4MULTITHREADED
   G4int nThreads = 0;
 #endif
@@ -143,6 +142,7 @@ int main(int argc,char** argv)
   }
   else  {  
     // interactive mode : define UI session
+    UImanager->ApplyCommand("/control/macroPath macros");
     UImanager->ApplyCommand("/control/execute init_vis.mac");
     if (ui->IsGUI()) {
       UImanager->ApplyCommand("/control/execute gui.mac");

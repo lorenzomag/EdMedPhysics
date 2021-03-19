@@ -35,7 +35,7 @@
 #include "globals.hh"
 
 class G4Run;
-
+extern G4String outputFileName;
 /// Run action class
 ///
 /// It accumulates statistic and computes dispersion of the energy deposit 

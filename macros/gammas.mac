@@ -1,0 +1,16 @@
+# Example macro file - proton beam  
+# 
+# Initialize kernel
+/run/initialize
+#
+# Specify the beam particle
+/gun/particle gamma
+
+# Set the beam particle energy
+/gun/energy 10 MeV
+
+# Print to screen progress of run every 100 events
+/run/printProgress 10000
+
+# One thousand protons will be generated
+/run/beamOn 1000000

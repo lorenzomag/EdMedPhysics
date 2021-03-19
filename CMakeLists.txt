@@ -35,7 +35,7 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(EdMedPhc_executable exampleEdMedPhc.cc ${sources} ${headers})
+add_executable(EdMedPhc_executable ${PROJECT_SOURCE_DIR}/src/exampleEdMedPhc.cc ${sources} ${headers})
 target_link_libraries(EdMedPhc_executable ${Geant4_LIBRARIES})
 
 #----------------------------------------------------------------------------
@@ -43,36 +43,8 @@ target_link_libraries(EdMedPhc_executable ${Geant4_LIBRARIES})
 # build EdMedPhc. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-set(EXAMPLEEdMedPhC_SCRIPTS
-  exampleEdMedPhc.out
-  exampleEdMedPh.in
-  gui.mac
-  init_vis.mac
-  run1.mac
-  run2.mac
-  run3.mac
-  run4.mac
-  run5.mac
-  run6.mac
-  vis.mac
-  basic.mac
-  protons.mac
-  ions.mac
-  gammas.mac
-  B_field.mac
-  vis_electrons.mac
-  vis_protons.mac
-  edit_histo.C
-  make_histos.C
-  )
 
-foreach(_script ${EXAMPLEEdMedPhC_SCRIPTS})
-  configure_file(
-    ${PROJECT_SOURCE_DIR}/${_script}
-    ${PROJECT_BINARY_DIR}/${_script}
-    COPYONLY
-    )
-endforeach()
+
 
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX

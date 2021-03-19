@@ -30,12 +30,14 @@
 
 #include "EdMedPhRunAction.hh"
 #include "EdMedPhAnalysis.hh"
+#include "EdMedPhRunAction.hh"
 
 #include "G4Run.hh"
 #include "G4RunManager.hh"
 #include "G4UnitsTable.hh"
 #include "G4SystemOfUnits.hh"
 
+G4String outputFileName;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 EdMedPhRunAction::EdMedPhRunAction()
@@ -86,6 +88,7 @@ EdMedPhRunAction::~EdMedPhRunAction()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+
 void EdMedPhRunAction::BeginOfRunAction(const G4Run* /*run*/)
 { 
   //inform the runManager to save random number seed
@@ -96,9 +99,15 @@ void EdMedPhRunAction::BeginOfRunAction(const G4Run* /*run*/)
 
   // Open an output file
   //
-  G4String fileName = "EdMedPhysics";
-  analysisManager->OpenFile(fileName);
-}
+  G4String fileName;
+  if (!outputFileName.size()){
+    fileName = "EdMedPhysics";
+  }
+  else{
+    fileName = outputFileName;
+  }
+    analysisManager->OpenFile(fileName);
+  }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
