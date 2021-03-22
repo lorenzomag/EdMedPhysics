@@ -5,6 +5,7 @@ EdMedPhc_executable
 Makefile
 cmake_install.cmake
 build/
+output/
 .envrc
 *.root
 *.pdf
