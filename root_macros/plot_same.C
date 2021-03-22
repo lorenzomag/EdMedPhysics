@@ -32,14 +32,15 @@
    
 */
 
-void plot_same(){
+void plot_same()
+{
 
   // The names of the files to input.
   // Rename the simulation output files
   // and change the names here as appropriate.
   
-  char filename_1[128] = "Protons.root";
-  char filename_2[128] = "Gammas.root";
+  char filename_1[128] = "datasets/gammas.root";
+  char filename_2[128] = "datasets/neutrons.root";
   
   // Use the filename character arrays from above.
   TFile * input_file_1 = new TFile(filename_1,"");
@@ -78,7 +79,7 @@ void plot_same(){
   Edep_vs_Z_2->SetLineColor(kBlue);
 
   Edep_vs_Z_1->Draw("hist");  
-  Edep_vs_Z_2->Draw("hist same");
+  Edep_vs_Z_2->Draw("hist SAME");
   
   // Save the canvas as a pdf...
   canvas.SaveAs("my_overplotted_histos.pdf");
@@ -88,5 +89,4 @@ void plot_same(){
   
   // Quit root and return to the terminal command prompt.
   gApplication->Terminate();
-
 }

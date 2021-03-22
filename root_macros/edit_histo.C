@@ -32,11 +32,12 @@
 */
 
 // Function declaration with optional argument
-void edit_histo(double x_max = -1.){
+void edit_histo(double x_max = -1., TString particle = "neutrons")
+{
 
   // The name of the file to input.
   // Ie the simulation output file name.
-  char filename[128] = "EdMedPhysics.root";
+  TString filename = "datasets/"+particle+".root";
 
   // Declare a TFile object to read in data from.
   // Use the filename character array from above.
@@ -110,10 +111,10 @@ void edit_histo(double x_max = -1.){
   Edep_vs_Z->Draw("hist");
 
   // Save the canvas as a pdf...
-  canvas.SaveAs("my_edited_histo.pdf");
+  canvas.SaveAs(particle+"_edited_histo.pdf");
 
   // ... and also as a root file.
-  Edep_vs_Z->SaveAs("my_edited_histo.root");
+  Edep_vs_Z->SaveAs(particle+"_edited_histo.root");
    
   // NB Several other file types can be specified
   // including image files (.png,.eps,.jpg); or even a .C macro.

@@ -27,11 +27,13 @@
 
  */
 
-void analyse_dose(){
-  
+void analyse_dose(TString particle = "neutrons",int n_events = -1)
+{
+
   // The name of the file to input, 
   // ie the simulation output file.
-  char filename[128] = "EdMedPhysics.root";
+
+  TString filename = "datasets/" + particle + ".root";
 
   // Declare a TFile object to read in data from.
   // Use the filename string from above.
@@ -58,7 +60,14 @@ void analyse_dose(){
   
   // There is one entry per hit and
   // typically many per beam particle.
-  int entries = tree->GetEntries();  
+  int entries = tree->GetEntries();
+
+  if (n_events > 0 && n_events <entries ){
+    entries = n_events;
+    cout << "ENTRIEEEES: " << entries << endl;
+  }
+
+
 
   // Set binning for histogram
   int    nBins = 50.;
@@ -99,6 +108,7 @@ void analyse_dose(){
   double x_max = hZ->GetXaxis()->GetBinCenter(bin_max);
 
   cout << endl;
+  cout << " Data for " << particle <<  endl;
   cout << " Maximum deposited energy = " << max_energy << " MeV, at Z = " << x_max << " cm " << endl;
 
   // The following variables should be adjusted.
@@ -134,10 +144,10 @@ void analyse_dose(){
   TGaxis::SetMaxDigits(2);
   
   hZ->Draw("hist");
-  canvas->SaveAs("hZ.pdf");
+  canvas->SaveAs(particle+"_hZ.pdf");
 
   // Create a new file to save the histograms in.
-  TFile * output_file = new TFile("dose.root","RECREATE");
+  TFile * output_file = new TFile(particle+"_dose.root","RECREATE");
   output_file->cd();
   
   hZ->Write();
@@ -147,5 +157,4 @@ void analyse_dose(){
  
   // quit root and return to the terminal command prompt
   gApplication->Terminate();
-
 }

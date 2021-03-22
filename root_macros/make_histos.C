@@ -25,11 +25,12 @@
    [0] .x make_histos.C
    
 */
-void make_histos(){
+void make_histos(TString particle = "neutrons"){
   
   // The name of the file to input, 
   // ie the simulation output file.
-  char filename[128] = "EdMedPhysics.root";
+
+  TString filename = "datasets/"+particle+".root";
 
   // Declare a TFile object to read in data from.
   // Use the filename string from above.
@@ -108,10 +109,10 @@ void make_histos(){
   // Draw as heat map ie with
   // counts in colors
   hXY->Draw("colz");
-  canvas->SaveAs("hXY.pdf");
+  canvas->SaveAs(particle+"_hXY.pdf");
 
   hZR->Draw("colz");
-  canvas->SaveAs("hZR.pdf");
+  canvas->SaveAs(particle+"_hZR.pdf");
 
   canvas->SetLogz(0);
 
@@ -122,10 +123,10 @@ void make_histos(){
   // alternative draw option - comment in if desired
   //hZXY->Draw("BOX");
 
-  canvas->SaveAs("hZXY.pdf");
+  canvas->SaveAs(particle+"_hZXY.pdf");
   
   // Create a new file to save the histograms in.
-  TFile * output_file = new TFile("my_new_histos.root","RECREATE");
+  TFile * output_file = new TFile(particle+"_histos.root","RECREATE");
   output_file->cd();
   
   hXY->Write();
