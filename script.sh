@@ -13,7 +13,7 @@ for PARTICLE in $PARTICLES; do
     echo "Running make_histos for $PARTICLE"
     root "root_macros/make_histos.C(\"$PARTICLE\")" 1> /dev/null &  pids[$((pid_counter++))]=$!
     echo "Running edit_histo for $PARTICLE"
-    root "root_macros/edit_histo.C(10,\"$PARTICLE\")" 1> /dev/null &    pids[$((pid_counter++))]=$!    
+    root "root_macros/edit_histo.C(60,\"$PARTICLE\")" 1> /dev/null &    pids[$((pid_counter++))]=$!    
 done
 
 echo "Running plot_same"
