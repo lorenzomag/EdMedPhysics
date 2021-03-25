@@ -29,6 +29,7 @@ for PARTICLE in $PARTICLES; do
 	echo "Moved files to ${PARTICLE}_output/"
 	mkdir -p ${PARTICLE}_output
 	mv ${PARTICLE}*.root ${PARTICLE}_output/
+    cp ${PARTICLE}*.pdf projectReport/Images/
     mv ${PARTICLE}*.pdf figures
 done
 
