@@ -258,7 +258,7 @@ G4VPhysicalVolume* EdMedPhcDetectorConstruction::DefineVolumes()
   //
   worldLV->SetVisAttributes (G4VisAttributes::GetInvisible());
 
-  auto simpleBoxVisAtt= new G4VisAttributes(G4Colour(1.0,1.0,1.0));
+  auto simpleBoxVisAtt= new G4VisAttributes(G4Colour(0.,0.47,0.75));
   simpleBoxVisAtt->SetVisibility(true);
   calorLV->SetVisAttributes(simpleBoxVisAtt);
 

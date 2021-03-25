@@ -90,8 +90,9 @@ void EdMedPhcEventAction::PrintEventStatistics(G4double absoEdep, G4double absoT
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EdMedPhcEventAction::BeginOfEventAction(const G4Event* /*event*/)
-{}
+void EdMedPhcEventAction::BeginOfEventAction(const G4Event*)
+{
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -122,13 +123,12 @@ void EdMedPhcEventAction::EndOfEventAction(const G4Event* event)
 
     PrintEventStatistics(
       absoHit->GetEdep(), absoHit->GetTrackLength());
-  }  
+   
   
   // Fill histograms, ntuple
   //
 
   // get analysis manager
-  // auto analysisManager = G4AnalysisManager::Instance();
  
   // fill histograms
   // analysisManager->FillH1(0, absoHit->GetEdep());
@@ -142,6 +142,7 @@ void EdMedPhcEventAction::EndOfEventAction(const G4Event* event)
   // analysisManager->FillNtupleDColumn(2, absoHit->GetTrackLength());
   // analysisManager->FillNtupleDColumn(3, gapHit->GetTrackLength());
   // analysisManager->AddNtupleRow();  
+  }
 }  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

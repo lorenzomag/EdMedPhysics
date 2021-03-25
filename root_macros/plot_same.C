@@ -34,7 +34,8 @@
 
 void plot_same()
 {
-
+  gROOT->SetStyle("ATLAS");
+  gStyle->SetMarkerSize(0.2);
   // The names of the files to input.
   // Rename the simulation output files
   // and change the names here as appropriate.

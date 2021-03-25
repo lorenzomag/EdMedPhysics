@@ -32,9 +32,10 @@
 */
 
 // Function declaration with optional argument
-void edit_histo(double x_max = -1., TString particle = "neutrons")
+void edit_histo(double x_max = -1., TString particle = "gammas")
 {
-
+  gROOT->SetStyle("ATLAS");
+  gStyle->SetMarkerSize(0.2);
   // The name of the file to input.
   // Ie the simulation output file name.
   TString filename = "datasets/"+particle+".root";
@@ -53,7 +54,7 @@ void edit_histo(double x_max = -1., TString particle = "neutrons")
 
   // Fix the histogram title and axis labels.
   Edep_vs_Z->SetTitle(";Z in phantom (mm);Accumulated energy deposited (MeV)");
-  
+
   // Fix the x-axis range.
   // Stay in the while loop until a valid answer is given.
   // (NB there is an option to skip this by setting the value as an 
@@ -89,7 +90,7 @@ void edit_histo(double x_max = -1., TString particle = "neutrons")
   
   // To not draw stats box,
   // uncomment the line below.
-  //gStyle->SetOptStat(0);
+  gStyle->SetOptStat(0);
   
   // Dont show the title. 
   // To include the title, 
@@ -104,7 +105,7 @@ void edit_histo(double x_max = -1., TString particle = "neutrons")
   // Create a canvas to draw on
   // and later to save as a pdf
   TCanvas canvas;
-  
+  TGaxis::SetMaxDigits(2);
   // Draw histogram as a simple histogram 
   // with no error bars.
   // This will only apply to the pdf image.
@@ -125,4 +126,13 @@ void edit_histo(double x_max = -1., TString particle = "neutrons")
   gApplication->Terminate();
   
   // "Wouldn't you like to be a pepper too?"
+}
+bool withinTumour(double x, double y, double z, double rad = 2, double o = 5)
+{
+  double pos = pow(x, 2) + pow(y, 2) + pow(z - o, 2);
+
+  if (pos <= pow(rad, 2))
+    return true;
+  else
+    return false;
 }

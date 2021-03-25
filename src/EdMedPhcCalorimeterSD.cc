@@ -32,6 +32,7 @@
 #include "G4HCofThisEvent.hh"
 #include "G4Step.hh"
 #include "G4ThreeVector.hh"
+#include "G4RunManager.hh"
 #include "G4SDManager.hh"
 #include "G4ios.hh"
 
@@ -78,10 +79,10 @@ void EdMedPhcCalorimeterSD::Initialize(G4HCofThisEvent* hce)
 
 G4bool EdMedPhcCalorimeterSD::ProcessHits(G4Step* step, 
                                      G4TouchableHistory*)
-{  
+{ 
   // energy deposit
   auto edep = step->GetTotalEnergyDeposit();
-
+  auto EventID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
   auto analysisManager = G4AnalysisManager::Instance();
   if(0.0 < edep) {
 
@@ -100,13 +101,13 @@ G4bool EdMedPhcCalorimeterSD::ProcessHits(G4Step* step,
     G4double z0 = 0.5*(z1 + z2);
     //    G4double r0 = std::sqrt(x0*x0 + y0*y0);
     analysisManager->FillH1(0,z0+25.*cm,edep);
-    
     //analysisManager->FillH1(1,z0+25.*cm,edep);
     //analysisManager->FillH1(2,z0+25.*cm,edep);
     analysisManager->FillNtupleDColumn(0, edep);
     analysisManager->FillNtupleDColumn(1, x0);
     analysisManager->FillNtupleDColumn(2, y0);
     analysisManager->FillNtupleDColumn(3, z0+25.*cm);
+    analysisManager->FillNtupleDColumn(4, EventID);
     analysisManager->AddNtupleRow();
   }
   // step length

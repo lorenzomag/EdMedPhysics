@@ -76,6 +76,7 @@ EdMedPhRunAction::EdMedPhRunAction()
   analysisManager->CreateNtupleDColumn("X");
   analysisManager->CreateNtupleDColumn("Y");
   analysisManager->CreateNtupleDColumn("Z");
+  analysisManager->CreateNtupleDColumn("EventID");
   analysisManager->FinishNtuple();
 }
 

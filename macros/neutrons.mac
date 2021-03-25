@@ -10,7 +10,7 @@
 /gun/energy 70 MeV
 
 # Print to screen progress of run every 100 events
-/run/printProgress 1000
+/run/printProgress 100
 
 # One thousand protons will be generated
-/run/beamOn 1000
+/run/beamOn 100000
