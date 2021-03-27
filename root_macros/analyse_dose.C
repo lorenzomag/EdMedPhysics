@@ -139,7 +139,7 @@ void analyse_dose(TString particle = "neutrons")
   }
   else if (particle == "neutrons")
   {
-    tumour_radius = 4;
+    tumour_radius = 2;
   }
   double tumor_dose = 0;
   double healthy_dose = 0;

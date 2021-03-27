@@ -132,7 +132,7 @@ void make_histos(TString particle = "neutrons"){
   }
   else if (particle == "neutrons")
   {
-    tumour_radius = 4;
+    tumour_radius = 2;
   }
   
   double max_Edep = *std::max_element(Edep_per_event.begin(), Edep_per_event.end());
